@@ -1,5 +1,4 @@
 from typing import List
-from pandas.core.common import not_none
 from pydantic import BaseModel
 
 
@@ -8,9 +7,9 @@ class Link(BaseModel):
     node_2: str
     weight: float
 
+
 class Links(BaseModel):
     links: List[Link]
-
 
 
 class Isa(BaseModel):
@@ -23,3 +22,16 @@ class Isa(BaseModel):
     w: int
     # jdm_id: int = 6
 
+class Relation(BaseModel):
+    """
+    Il est demandé d'énumérer les GENERIQUES/hyperonymes du terme.
+    """
+    source: str
+    target: str
+    relation_type: str
+    poids: float
+    # jdm_id: int = 6
+
+
+class Relations(BaseModel):
+    relations: List[Relation]
