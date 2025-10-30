@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Any
 from pydantic import BaseModel
 
 
@@ -35,3 +35,17 @@ class Relation(BaseModel):
 
 class Relations(BaseModel):
     relations: List[Relation]
+    # __pydantic_custom_init__ = True
+    def __get_relation_list__(self, relations):
+        return self.relations
+
+    def __set_relation_list__(self, relation_list: list):
+        self.relations = relation_list
+        return 0
+    #
+    # def __call__(self, relations: list):
+    #     self.relations = relations
+    #
+    # def __init__(self, relations: list, /, **data: Any):
+    #     super().__init__(**data)
+    #     self.relations = relations

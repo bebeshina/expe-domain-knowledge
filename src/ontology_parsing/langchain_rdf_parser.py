@@ -115,3 +115,5 @@ def run(path):
     ol = OntologyLoader(path)
     docs = ol.load()
     return docs
+
+run(f"{ONTOLOGY_DIR}/VehicleParts.rdf")
