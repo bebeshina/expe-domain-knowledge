@@ -108,14 +108,6 @@ def test(texte):
             print(r.source, r.relation_type, r.target, r.poids)
     updated = normalize_graph(rels)
     return rels
-"""
-Intérieur Sportline Pédalier look aluminium Jantes en alliage 20’’ Vega noires  
-        Volant 3 branches sport en_cuir  multifonctions chauffant avec  palettes, détection des mains 
-        Confort et agrément  - Direction dynamique progressive
-        Palettes au_volant pour sélection du freinage régénératif Ligne et design
-        Badge Sportline sur le hayon de coffre - Ciel de pavillon_noir - Coques de rétroviseurs extérieurs noir glossy
-        Design intérieur Sportline : sellerie tissu suédine noir perforé,  matériau synthétique noir et surpiqûres grises et noires
-"""
 
 
 def augment_relations(relations:list):
