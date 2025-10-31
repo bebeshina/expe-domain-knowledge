@@ -1,14 +1,10 @@
 import itertools
-
 from docling.document_converter import DocumentConverter, PdfFormatOption
 from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
-
-
 from docling_core.transforms.chunker.hybrid_chunker import HybridChunker
 from docling_core.types.doc.document import TableItem
 from langchain_core.documents import Document
-
 from docling_core.types.doc.labels import DocItemLabel
 
 
