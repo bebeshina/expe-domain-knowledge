@@ -1,6 +1,7 @@
 # Commercial name extractor and encoder
 import ollama
 from resources.extraction_templates import commercial_names_template
+from cryptography.fernet import Fernet
 
 
 def extract_names(text):
@@ -13,33 +14,48 @@ def extract_names(text):
     name_list = response_text.split(";")
     return name_list
 
-NO_OF_CHARS = 256
+
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+encrypted = dict()
+hash_dict = dict()
 
 
-def get_next_state(pat, M, state, x):
-    if state < M and x == ord(pat[state]):
-        return state+1
-    return state
+def encrypt_names(spl: list, text: str):
+    # data masking strategy
+    byte_text = text.encode(encoding="utf-8")
+    for e in spl:
+        byte_e = e.encode(encoding="utf-8")
+        if byte_e not in encrypted.keys():
+            cipher_text = cipher_suite.encrypt(byte_e)
+            encrypted[byte_e] = cipher_text
+        else:
+            cipher_text = encrypted.get(byte_e)
+        text = byte_text.replace(e, cipher_text)
+    return text
 
 
-def encode_store_names(names: list):
-    temp_dic = {}
-    for e in names:
-        M = len(e)
-        TF = [[0 for i in range(NO_OF_CHARS)]
-              for _ in range(M + 1)]
+def process_encrypt_names(txt: str):
+    ls = extract_names(txt)
+    print(ls)
+    encrypted_text = encrypt_names(ls, txt)
+    return encrypted_text
 
-        for state in range(M + 1):
-            for x in range(NO_OF_CHARS):
-                z = get_next_state(e, M, state, x)
-                TF[state][x] = z
-        print(TF)
-        temp_dic[TF] = e
-    return temp_dic
 
-# Coroutines, just like generators, are resumable functions but instead of generating values, they consume values on the fly.
+def hash_names(spl: list, text: str):
+    for e in spl:
+        hash_e = hash(e)
+        if hash_e not in hash_dict.keys():
+            hash_dict[e] = hash_e
+        else:
+            hash_e = hash_dict.get(e)
+        text = text.replace(e, str(hash_e))
+    return text
 
-txt = """
+t = """
 Tarifs Škoda Enyaq Coupé (TTC) Element Clever Plus Sportline 100% électrique Batterie 85 286 ch"""
-ls = extract_names(txt)
-encode_store_names(ls)
+lst = ['Škoda', 'Enyaq Coupé', 'Element Clever Plus', 'Sportline']
+
+print(hash_names(lst, t))
+print(encrypt_names(lst, t))
+
