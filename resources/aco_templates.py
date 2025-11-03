@@ -97,34 +97,34 @@ relation_check = """Est-ce que l'affirmation est vraie? Réponds 0 si elle est v
 isa_augmentation_template = """<instruction>Quel est le générique de {term} (automobile). 
                             Ne donne pas d'explication ni commentaire.</instruction>
                             <examples>chien r_isa animal, table r_isa meuble</examples> 
-                            <format>{term} r_isa terme_générique</format>"""
+                            <format>{term} r_isa ta_réponse</format>"""
 
 carac_augmentation_template = """<instruction>Quelles sont les caractéristiques typiques de {term} (automobile). 
-                            Ne donne pas d'explication ni commentaire.</instruction>
+                            Ne donne pas d'explication ni commentaire. </instruction>
                             <examples>soupe r_carac liquide, train r_carac rapide, design r_carac personnalisable, 
                             chaise r_carac blanche</examples> 
-                            <format>{term} r_carac caractéristique_typique</format>
+                            <format>{term} r_carac ta_réponse</format>
                             """
 
 has_part_augmentation_template = """<instruction>Quelles sont les parties de {term} (automobile). 
                             Ne donne pas d'explication ni commentaire.</instruction> 
                             <examples>ciel maison r_has_part fenêtre, garçon r_has_part bras, 
                             document r_has_part page</examples> 
-                            <format>{term} r_has_part partie_typique</format>"""
+                            <format>{term} r_has_part ta_réponse</format>"""
 
 object_mater_augmentation_template = """<instruction>Quelle est la matière de {term} (automobile). 
                             Ne donne pas d'explication ni commentaire.</instruction>
                             <examples>pain r_object_mater farine, clé r_object_mater métal, habillage r_object_mater cuir</examples>
-                            <format>{term} r_object_mater matière_substance_typique</format>
+                            <format>{term} r_object_mater ta_réponse</format>
                             """
 
 color_augmentation_template = """<instruction>Quelle est la couleur de {term} (automobile). 
                             Ne donne pas d'explication ni commentaire.</instruction>
                             <examples>ciel r_color gris, drap r_color blanc, table r_color noir </examples> 
-                            <format>{term} r_color couleur_typique</format>
+                            <format>{term} r_color ta_réponse</format>
                             """
 
 lieu_augmentation_template = """<instruction>Quel est le lieu typique de {term} (en rapport avec l'automobile). 
                             Ne donne pas d'explication ni commentaire.</instruction>
                             <examples>"lit r_lieu chambre, bâteau r_lieu mer, voiture r_lieu route</examples>
-                            <format>{term} r_lieu lieu_typique</format>"""
+                            <format>{term} r_lieu ta_réponse</format>"""

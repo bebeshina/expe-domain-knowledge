@@ -65,7 +65,6 @@ def qualify_associations(links, text) -> list:
     return rels
 
 
-
 def normalize_graph(relations: list) -> list:
     srt = sorted([r.poids for r in relations])
     max_w = srt[-1]
