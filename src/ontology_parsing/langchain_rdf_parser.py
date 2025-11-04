@@ -1,9 +1,13 @@
 from typing import Any, List, Optional
+from uuid import uuid4
+
+from langchain_chroma import Chroma
 from langchain_core.document_loaders.base import BaseLoader
 from langchain_core.documents import Document
+from langchain_ollama import OllamaEmbeddings
 from rdflib import Graph
 
-from definitions import ONTOLOGY_DIR
+from definitions import ONTOLOGY_DIR, VECTORSTORE_DIR
 
 """
 https://github.com/vemonet
@@ -114,6 +118,21 @@ class OntologyLoader(BaseLoader):
 def run(path):
     ol = OntologyLoader(path)
     docs = ol.load()
-    return docs
+
+    embeddings = OllamaEmbeddings(model="mxbai-embed-large")
+
+    vector_store = Chroma(
+        collection_name="example_collection",
+        embedding_function=embeddings,
+        persist_directory=f"{VECTORSTORE_DIR}"
+    )
+    uuids = [str(uuid4()) for _ in range(len(docs))]
+    vector_store.add_documents(documents=docs, ids=uuids)
+
+    # vector_store = Chroma.from_documents(docs, embedding=embeddings, persist_directory=f"{VECTORSTORE_DIR}")
+    related: list = vector_store.similarity_search_with_vectors("driver assist")
+    return related
+# load into vectorstore
+
 
 run(f"{ONTOLOGY_DIR}/VehicleParts.rdf")
