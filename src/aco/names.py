@@ -52,9 +52,11 @@ def hash_names(spl: list, text: str):
         text = text.replace(e, str(hash_e))
     return text
 
+
 t = """
 Tarifs Škoda Enyaq Coupé (TTC) Element Clever Plus Sportline 100% électrique Batterie 85 286 ch"""
 lst = ['Škoda', 'Enyaq Coupé', 'Element Clever Plus', 'Sportline']
+
 
 print(hash_names(lst, t))
 print(encrypt_names(lst, t))
