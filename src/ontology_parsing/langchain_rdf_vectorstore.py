@@ -34,7 +34,7 @@ def load_into_chroma(docs: List[langchain_core.documents.Document]):
 def run():
     vectordb = Chroma(persist_directory=f"{VECTORSTORE_DIR}", embedding_function=embeddings)
     # related_ontology_data = vectordb.similarity_search_with_vectors("Advanced Driver Assist System")
-    test = vectordb.similarity_search_with_vectors("Braking System")
+    test = vectordb.similarity_search_with_vectors("active parking assistance system")
     print(test)
 
 
