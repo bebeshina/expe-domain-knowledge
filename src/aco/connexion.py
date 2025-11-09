@@ -153,9 +153,6 @@ def test_whole_process():
         print(a, "50")
 
 
-
-    # ontology_layer =
-
 test_whole_process()
 
 
